@@ -1,27 +1,25 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+// Copyright (c) 2020 WiseTime. All rights reserved.
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import * as vscode from 'vscode';
+import { API as GitAPI, GitExtension, APIState } from './types/vscode/git'; 
+
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "branch-in-window-title" is now active!');
+	console.log('Extension "branch-in-window-title" is active');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+	const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git');
+	console.log(gitExtension);
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+	if (gitExtension) {
+		const git = gitExtension.exports.getAPI(1);
+		const rootPath = vscode.workspace.rootPath;
+		const repository = git.repositories[0];
+		const head = repository.state.HEAD;
 
-	context.subscriptions.push(disposable);
+		console.log('git extension is available');
+		console.log(git.repositories);
+		console.log(head);
+	}
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
