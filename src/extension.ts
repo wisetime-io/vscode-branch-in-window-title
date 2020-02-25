@@ -1,25 +1,26 @@
 // Copyright (c) 2020 WiseTime. All rights reserved.
 
 import * as vscode from 'vscode';
-import { API as GitAPI, GitExtension, APIState } from './types/vscode/git'; 
+import detectBranch from './branchDetector';
 
 export function activate(context: vscode.ExtensionContext) {
-
-	console.log('Extension "branch-in-window-title" is active');
-
-	const gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git');
-	console.log(gitExtension);
-
-	if (gitExtension) {
-		const git = gitExtension.exports.getAPI(1);
-		const rootPath = vscode.workspace.rootPath;
-		const repository = git.repositories[0];
-		const head = repository.state.HEAD;
-
-		console.log('git extension is available');
-		console.log(git.repositories);
-		console.log(head);
+	if (!vscode.workspace.workspaceFolders) {
+		return;
 	}
+	const config = vscode.workspace.getConfiguration("window");
+	const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
+
+	const branchDetector = detectBranch(projectRoot, (branchName) => {
+		console.log(`Detected Git branch: ${branchName}`);
+		const originalTitleConfig = (config.get("title") as string).replace(/ \${separator} \[Branch: .*\]/, '');
+		if (branchName) {
+			config.update("title", originalTitleConfig + " ${separator} [Branch: " + branchName + "]", false);
+		} else {
+			config.update("title", originalTitleConfig, false);
+		}
+	});
+
+	context.subscriptions.push(branchDetector);
 }
 
 export function deactivate() {}
