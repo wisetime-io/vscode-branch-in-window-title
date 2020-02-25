@@ -4,23 +4,29 @@ import * as vscode from 'vscode';
 import detectBranch from './branchDetector';
 
 export function activate(context: vscode.ExtensionContext) {
-	if (!vscode.workspace.workspaceFolders) {
-		return;
-	}
-	const config = vscode.workspace.getConfiguration("window");
-	const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
+  if (!vscode.workspace.workspaceFolders) {
+    return;
+  }
+  const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
 
-	const branchDetector = detectBranch(projectRoot, (branchName) => {
-		console.log(`Detected Git branch: ${branchName}`);
-		const originalTitleConfig = (config.get("title") as string).replace(/ \${separator} \[Branch: .*\]/, '');
-		if (branchName) {
-			config.update("title", originalTitleConfig + " ${separator} [Branch: " + branchName + "]", false);
-		} else {
-			config.update("title", originalTitleConfig, false);
-		}
-	});
+  const branchDetector = detectBranch(projectRoot, (branchName) => {
+    const config = vscode.workspace.getConfiguration('window');
+    const currentTitleConfig = config.get('title') as string;
+    const newTitleConfig = windowTitleConfig(currentTitleConfig, branchName);
+    if (newTitleConfig !== currentTitleConfig) {
+      config.update('title', newTitleConfig);
+    }
+  });
 
-	context.subscriptions.push(branchDetector);
+  context.subscriptions.push(branchDetector);
 }
 
-export function deactivate() {}
+export function deactivate() { }
+
+function windowTitleConfig(currentTitleConfig: string, branchName: string | undefined): string {
+  const withoutBranch = currentTitleConfig.replace(/ \${separator} \[Branch: .*\]/, '');
+  if (branchName) {
+    return `${withoutBranch} \${separator} [Branch: ${branchName}]`;
+  }
+  return withoutBranch;
+}

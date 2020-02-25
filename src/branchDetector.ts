@@ -24,9 +24,9 @@ class BranchDetector implements vscode.Disposable {
       if (content.startsWith('ref: refs/heads/')) {
         return content.replace(/^(ref: refs\/heads\/\.*)/, '').trim();
       }
-	  } catch (error) {
-      // Unable to read file.
-	  }
+    } catch (error) {
+      // Unable to read file. Perhaps it does not exist.
+    }
     return undefined;
   }
 }
@@ -42,7 +42,7 @@ class BranchDetector implements vscode.Disposable {
 export default function detectBranch(
   projectRootPath: string,
   onBranch: (branchName: string | undefined) => void,
-  pollInterval: number = 5000
+  pollInterval: number = 3000
 ): vscode.Disposable {
   return new BranchDetector(projectRootPath, onBranch, pollInterval);
 }
