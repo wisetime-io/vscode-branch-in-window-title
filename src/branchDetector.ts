@@ -7,9 +7,9 @@ class BranchDetector implements vscode.Disposable {
 
   constructor(projectRootPath: string, pollingInterval: number, onBranch: (branchName: string | undefined) => void) {
     const headFile = projectRootPath + '/.git/HEAD';
-    this.getBranchName(headFile).then(onBranch);
+    this.readBranchName(headFile).then(onBranch);
     this.intervalId = setInterval(() => {
-      this.getBranchName(headFile).then(onBranch);
+      this.readBranchName(headFile).then(onBranch);
     }, pollingInterval);
   }
 
@@ -17,7 +17,7 @@ class BranchDetector implements vscode.Disposable {
     clearInterval(this.intervalId);
   }
 
-  private async getBranchName(headFilePath: string): Promise<string | undefined> {
+  private async readBranchName(headFilePath: string): Promise<string | undefined> {
     try {
       const data = await vscode.workspace.fs.readFile(vscode.Uri.file(headFilePath));
       const content = Buffer.from(data).toString('utf8');

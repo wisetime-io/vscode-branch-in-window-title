@@ -22,17 +22,20 @@
 		"*"
 	],
 	"contributes": {
-    "configuration": {
-      "title": "Branch in Window Title",
-      "properties": {
-        "branchInWindowTitle.branchPollingInterval": {
-          "type": ["number", "null"],
-          "default": 3000,
-          "description": "Specifies the Git branch polling interval in milliseconds."
-        }
-      }
-    }
-  },
+		"configuration": {
+			"title": "Branch in Window Title",
+			"properties": {
+				"branchInWindowTitle.branchPollingInterval": {
+					"type": [
+						"number",
+						"null"
+					],
+					"default": 3000,
+					"description": "Specifies the Git branch polling interval in milliseconds."
+				}
+			}
+		}
+	},
 	"main": "./out/extension.js",
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -43,6 +46,7 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
+		"@types/chai": "^4.2.9",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^7.0.1",
 		"@types/node": "^12.11.7",
@@ -50,10 +54,11 @@
 		"@typescript-eslint/eslint-plugin": "^2.18.0",
 		"@typescript-eslint/parser": "^2.18.0",
 		"eslint": "^6.8.0",
+		"chai": "^4.2.0",
 		"glob": "^7.1.6",
 		"mocha": "^7.0.1",
+		"typemoq": "^2.1.0",
 		"typescript": "^3.7.5",
 		"vscode-test": "^1.3.0"
-	},
-	"dependencies": {}
+	}
 }

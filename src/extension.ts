@@ -8,15 +8,16 @@ export function activate(context: vscode.ExtensionContext) {
     return;
   }
   const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
-  const extensionConfig = vscode.workspace.getConfiguration('branchInWindowTitle');
-  const pollingInterval = extensionConfig.get('branchPollingInterval') as number;
+  const pollingInterval = vscode.workspace
+    .getConfiguration('branchInWindowTitle')
+    .get('branchPollingInterval') as number;
 
   const branchDetector = detectBranch(projectRoot, pollingInterval, (branchName) => {
-    const config = vscode.workspace.getConfiguration('window');
-    const currentTitleConfig = config.get('title') as string;
-    const newTitleConfig = windowTitleConfig(currentTitleConfig, branchName);
-    if (newTitleConfig !== currentTitleConfig) {
-      config.update('title', newTitleConfig);
+    const windowConfig = vscode.workspace.getConfiguration('window');
+    const currentTitle = windowConfig.get('title') as string;
+    const newTitle = windowTitle(currentTitle, branchName);
+    if (newTitle !== currentTitle) {
+      windowConfig.update('title', newTitle);
     }
   });
 
@@ -25,8 +26,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() { }
 
-function windowTitleConfig(currentTitleConfig: string, branchName: string | undefined): string {
-  const withoutBranch = currentTitleConfig.replace(/ \${separator} \[Branch: .*\]/, '');
+function windowTitle(currentTitle: string, branchName: string | undefined): string {
+  const withoutBranch = currentTitle.replace(/ \${separator} \[Branch: .*\]/, '');
   if (branchName) {
     return `${withoutBranch} \${separator} [Branch: ${branchName}]`;
   }
