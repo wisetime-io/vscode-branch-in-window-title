@@ -8,8 +8,10 @@ export function activate(context: vscode.ExtensionContext) {
     return;
   }
   const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
+  const extensionConfig = vscode.workspace.getConfiguration('branchInWindowTitle');
+  const pollingInterval = extensionConfig.get('branchPollingInterval') as number;
 
-  const branchDetector = detectBranch(projectRoot, (branchName) => {
+  const branchDetector = detectBranch(projectRoot, pollingInterval, (branchName) => {
     const config = vscode.workspace.getConfiguration('window');
     const currentTitleConfig = config.get('title') as string;
     const newTitleConfig = windowTitleConfig(currentTitleConfig, branchName);

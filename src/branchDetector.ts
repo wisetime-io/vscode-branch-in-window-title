@@ -5,12 +5,12 @@ import * as vscode from 'vscode';
 class BranchDetector implements vscode.Disposable {
   private intervalId: NodeJS.Timeout;
 
-  constructor(projectRootPath: string, onBranch: (branchName: string | undefined) => void, pollInterval: number) {
+  constructor(projectRootPath: string, pollingInterval: number, onBranch: (branchName: string | undefined) => void) {
     const headFile = projectRootPath + '/.git/HEAD';
     this.getBranchName(headFile).then(onBranch);
     this.intervalId = setInterval(() => {
       this.getBranchName(headFile).then(onBranch);
-    }, pollInterval);
+    }, pollingInterval);
   }
 
   dispose(): void {
@@ -36,13 +36,13 @@ class BranchDetector implements vscode.Disposable {
  *
  * @param projectRootPath The project root path in which we expect to find the .git directory.
  * @param onBranch A callback that is fired whenever a branch is detected or changed.
- * @param pollInterval Interval in milliseconds for file system polling. Defaults to 5000.
+ * @param pollingInterval Interval in milliseconds for file system polling. Defaults to 3000.
  * @return A disposable that stops branch detection when disposed.
  */
 export default function detectBranch(
   projectRootPath: string,
-  onBranch: (branchName: string | undefined) => void,
-  pollInterval: number = 3000
+  pollingInterval: number = 3000,
+  onBranch: (branchName: string | undefined) => void
 ): vscode.Disposable {
-  return new BranchDetector(projectRootPath, onBranch, pollInterval);
+  return new BranchDetector(projectRootPath, pollingInterval, onBranch);
 }
