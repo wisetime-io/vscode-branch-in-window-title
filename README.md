@@ -28,6 +28,10 @@ This means that I can go about my day without worring about time keeping. WiseTi
 
 The Jira Connector watches Jira for new issues and automatically syncs them to WiseTime as tags for automatic activity tagging.
 
+## Extension Settings
+
+In order to detect the current Git branch, the extension polls the filesystem at regular intervals. By default it checks every 3000 milliseconds. You can change the polling interval by updating the `branchInWindowTitle.branchPollingInterval` setting. It expects an integer value in milliseconds.
+
 ## Using an IntelliJ-based IDE?
 
 We also have you covered if you use a JetBrains IDE. You can grab our **Branch in Window Title** plugin for IntelliJ, Websorm & friends [here](https://plugins.jetbrains.com/plugin/9675-branch-in-window-title).
