@@ -4,9 +4,21 @@
 
 ![VS Code Window Title](doc/resources/window-title.png)
 
-This can be used to automate time allocation to issue tracking systems via [WiseTime](https://wisetime.com). Here is an example developement workflow.
+## Installation
 
-## WiseTime Jira Workflow
+Download the [latest release](https://github.com/wisetime-io/vscode-branch-in-window-title/releases/download/v0.1.0/branch-in-window-title-0.1.0.vsix) of Branch in Window Title. You can then install the extension via command line:
+
+```text
+code --install-extension branch-in-window-title-0.1.0.vsix
+```
+
+You can also install the extension by using the `Install from VSIX` command in the Extensions view command drop-down, or the `Extensions: Install from VSIX` command in the Command Palette.
+
+## Automated Timekeeping for Development Teams
+
+Branch in Window Title can be used to automate time allocation to issue tracking systems via [WiseTime](https://wisetime.com). Our engineering team uses Jira, and this is how it fits into our development workflow at WiseTime.
+
+![Keep Calm and Flow on](doc/resources/keep-calm-and-flow-on.png)
 
 I've got my brew next to me, my headphones on. Let's get some some work done. I check my Jira board and start on a new ticket. I read the issue description, looks easy enough for a change! First up I need to create a new branch. There's a Create Branch link right there in Jira. Let's click it.
 
