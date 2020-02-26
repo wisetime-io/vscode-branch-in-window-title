@@ -18,11 +18,11 @@ I select the relevant repository, and choose to branch from master.
 
 By default, Bitbucket will add the Jira issue number to the branch name. If I can get this branch name into my window title, WiseTime will be able to automatically tag the time I spend in Visual Studio Code with the right issue. This is exactly what the Branch in Window Title extension allows me to do.
 
-Next, I checkout the branch and open the project in VS Code.
+I checkout the branch and open the project in VS Code.
 
 ![Git Branch in VS Code Window Title](doc/resources/vscode-branch-in-window-title.png)
 
-While I work in VS Code, my activity starts showing up in my private timeline in the WiseTime console, tagged with the Jira issue number.
+While I work in VS Code, my activity starts showing up in my [private](https://wisetime.com/privacy-by-design/) timeline in the WiseTime console, tagged with the Jira issue number.
 
 ![Time Automatically Tagged in WiseTime Console](doc/resources/wisetime-console.png)
 
