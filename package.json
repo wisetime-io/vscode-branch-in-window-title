@@ -3,7 +3,7 @@
 	"displayName": "Branch in Window Title",
 	"description": "Visual Studio Code extension that shows the current Git branch in the window title. This can be used to automate time allocation to issue tracking systems via WiseTime.",
 	"publisher": "WiseTime",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"license": "Apache-2.0",
 	"engines": {
 		"vscode": "^1.42.0"
