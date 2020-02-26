@@ -5,6 +5,10 @@
 	"publisher": "WiseTime",
 	"version": "0.1.0",
 	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wisetime-io/vscode-branch-in-window-title.git"
+	},
 	"engines": {
 		"vscode": "^1.42.0"
 	},
