@@ -23,7 +23,7 @@ Branch in Window Title can be used to automate time allocation to issue tracking
 I've got my brew next to me, my headphones on. Let's get some some work done.
 
 <p align="center">
-![Keep Calm and Flow on](doc/resources/keep-calm-and-flow-on.png)
+  <img width="206" height="300" src="doc/resources/keep-calm-and-flow-on.png">
 </p>
 
 I check my Jira board and start on a new ticket. I read the issue description, looks easy enough for a change! First up I need to create a new branch. There's a Create Branch link right there in Jira. Let's click it.
