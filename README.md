@@ -1,37 +1,47 @@
 # Branch in Window Title VS Code Extension
 
-**Branch in Window Title** is a simple Visual Studio Code extension that looks for a Git repository in the currently open workspace. If a Git repository is detected, the current branch name is appended to the VS Code window title.
+**Branch in Window Title** is a simple [Visual Studio Code](https://code.visualstudio.com) extension that looks for a Git repository in the currently open workspace. If a Git repository is detected, the current branch name is appended to the VS Code window title.
+
+![VS Code Window Title](doc/resources/window-title.png)
 
 This can be used to automate time allocation to issue tracking systems via [WiseTime](https://wisetime.com). Here is an example developement workflow.
 
 ## WiseTime Jira Workflow
 
-I have been assigned a new ticket. I read the issue description, and then create a new branch via Jira.
+I've got my brew next to me, my headphones on. Let's get some some work done. I check my Jira board and start on a new ticket. I read the issue description, looks easy enough for a change! First up I need to create a new branch. There's a Create Branch link right there in Jira. Let's click it.
 
 ![Jira Issue](doc/resources/jira-issue.png)
 
-I select the relevant repository, choose to branch from master.
+I select the relevant repository, and choose to branch from master.
 
 ![Create Git Branch from Jira](doc/resources/jira-create-branch.png)
+
+By default, Bitbucket will add the Jira issue number to the branch name. If I can get this branch name into my window title, WiseTime will be able to automatically tag the time I spend in Visual Studio Code with the right issue. This is exactly what the Branch in Window Title extension allows me to do.
 
 Next, I checkout the branch and open the project in VS Code.
 
 ![Git Branch in VS Code Window Title](doc/resources/vscode-branch-in-window-title.png)
 
-Since I am running the **Branch in Window Title** extension, WiseTime is able to automatically tag my activity with the relevant Jira issue number.
+While I work in VS Code, my activity starts showing up in my private timeline in the WiseTime console, tagged with the Jira issue number.
 
 ![Time Automatically Tagged in WiseTime Console](doc/resources/wisetime-console.png)
 
-This means that I can go about my day without worring about time keeping. WiseTime automatically handles that for me. At the end of the day (or week), I quickly review my timeline and post time to the team. Our [Jira Connector](https://wisetime.com/jira/) then creates a worklog entry against the Jira issue.
+This means that I can go about my day without ever worring about time keeping. WiseTime keeps an accurate record of what I have been doing, even if I've been multitasking like crazy (I don't recommend). At the end of the day, or week (I don't recommend!), I can review my timeline and post time to the team.
+
+Our [WiseTime Jira Connector](https://wisetime.com/jira/) ([also open source](https://github.com/wisetime-io/wisetime-jira-connector)!) then receives the posted time and creates a worklog entry against the Jira issue.
 
 ![Time Posted to Jira Worklog](doc/resources/jira-worklog.png)
 
-The Jira Connector watches Jira for new issues and automatically syncs them to WiseTime as tags for automatic activity tagging.
+The Jira Connector also watches Jira for new issues and automatically syncs them to WiseTime as tags for automatic activity tagging. The Jira Connector is a small application that speaks both WiseTime API and Jira API. If you are using Jira Cloud, we allow you to provision a Jira Cloud Connector through your WiseTime team settings page. If you are running your own Jira Server, you can pull our Jira Connector Docker image and connect it to your onprem instance.
+
+### Many Connection Options
+
+Not using Jira? We offer many other types of [Connectors](https://wisetime.com/connectors/), including [Zappier](https://wisetime.com/zapier/). We also provide the [WiseTime Connect API](https://wisetime.com/docs/connect/), as well as a [WiseTime Connector Java Library](https://github.com/wisetime-io/wisetime-connector-java) that wraps the API. With these, you can easily implement your own custom connector.
 
 ## Extension Settings
 
-In order to detect the current Git branch, the extension polls the filesystem at regular intervals. By default it checks every 3000 milliseconds. You can change the polling interval by updating the `branchInWindowTitle.branchPollingInterval` setting. It expects an integer value in milliseconds.
+In order to detect the current Git branch, the Branch Title in Window extension polls the filesystem at regular intervals. By default it checks every 3000 milliseconds. You can change the polling interval by updating the `branchInWindowTitle.branchPollingInterval` setting. It expects an integer value in milliseconds.
 
 ## Using an IntelliJ-based IDE?
 
-We also have you covered if you use a JetBrains IDE. You can grab our **Branch in Window Title** plugin for IntelliJ, Websorm & friends [here](https://plugins.jetbrains.com/plugin/9675-branch-in-window-title).
+We also have you covered if you use a JetBrains IDE. You can grab our Branch in Window Title plugin for IntelliJ, Websorm & friends [here](https://plugins.jetbrains.com/plugin/9675-branch-in-window-title).
