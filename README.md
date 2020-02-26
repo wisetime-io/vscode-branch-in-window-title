@@ -18,15 +18,13 @@ You can also install the extension by using the `Install from VSIX` command in t
 
 Branch in Window Title can be used to automate time allocation to issue tracking systems via [WiseTime](https://wisetime.com). Our engineering team uses Jira, and this is how it fits into our development workflow at WiseTime.
 
-### Keep Calm and Flow on
-
-I've got my brew next to me, my headphones on. Let's get some some work done.
-
 <p align="center">
   <img width="206" height="300" src="doc/resources/keep-calm-and-flow-on.png">
 </p>
 
-I check my Jira board and start on a new ticket. I read the issue description, looks easy enough for a change! First up I need to create a new branch. There's a Create Branch link right there in Jira. Let's click it.
+### Keep Calm and Flow on
+
+I've got my brew next to me, my headphones on. Let's get some some work done. I check my Jira board and start on a new ticket. I read the issue description, looks easy enough for a change! First up I need to create a new branch. There's a Create Branch link right there in Jira. Let's click it.
 
 ![Jira Issue](doc/resources/jira-issue.png)
 
