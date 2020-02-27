@@ -5,8 +5,8 @@ import detectBranch from './branchDetector';
 import updateTitle from './titleUpdater';
 
 const windowConfig = () => vscode.workspace.getConfiguration('window');
-const getWindowTitle = (): string => windowConfig().get('title') as string;
-const setWindowTitle = (title: string): Thenable<void> => windowConfig().update('title', title);
+const getWindowTitle = () => windowConfig().get('title') as string;
+const setWindowTitle = (title: string) => windowConfig().update('title', title);
 
 export function activate(context: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders) {

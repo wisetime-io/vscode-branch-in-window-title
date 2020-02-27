@@ -49,5 +49,5 @@ function deleteGitHeadFile(): void {
 function writeGitHeadFile(content: string): void {
   const uri = vscode.Uri.file(gitHeadFilePath);
   const data = new TextEncoder().encode(content);
-  fs.writeFileSync(gitHeadFilePath,data);
+  fs.writeFileSync(gitHeadFilePath, data);
 };
