@@ -6,9 +6,7 @@
 
 ## Installation
 
-If you already have VS Code installed on your machine, you can click this link to install the extension:
-
-* [Install Branch in Window Title Extension](vscode:extension/wisetime.branch-in-window-title)
+You can install the extension from the [Branch in Window Title page](https://marketplace.visualstudio.com/items?itemName=wisetime.branch-in-window-title) on the Visual Studio marketplace.
 
 Alternatively, you can [download the latest release](https://github.com/wisetime-io/vscode-branch-in-window-title/releases/download/v0.1.0/branch-in-window-title-0.1.0.vsix) of Branch in Window Title, then install the extension via the command line:
 
