@@ -1,8 +1,8 @@
 // Copyright (c) 2020 WiseTime. All rights reserved.
 
-import * as r from 'ramda';
+import { curry } from 'ramda';
 
-const updateTitle = r.curry(
+const updateTitle = curry(
   function(
     getTitle: () => string,
     setTitle: (t: string) => Thenable<void>,
