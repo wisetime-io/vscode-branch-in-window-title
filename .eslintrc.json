@@ -10,12 +10,12 @@
     ],
     "rules": {
         "@typescript-eslint/semi": "warn",
+        "@typescript-eslint/naming-convention": [
+          "warn", { "selector": "class", "format": ["PascalCase"] }
+        ],
         "curly": "warn",
         "eqeqeq": "warn",
         "no-throw-literal": "warn",
         "semi": "off"
-    },
-  "@typescript-eslint/naming-convention": [
-    "warn", { "selector": "class", "format": ["PascalCase"] }
-  ]
+    }
 }
