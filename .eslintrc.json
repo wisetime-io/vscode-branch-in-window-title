@@ -15,5 +15,8 @@
         "eqeqeq": "warn",
         "no-throw-literal": "warn",
         "semi": "off"
-    }
+    },
+  "@typescript-eslint/naming-convention": [
+    "warn", { "selector": "class", "format": ["PascalCase"] }
+  ]
 }
