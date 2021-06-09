@@ -10,7 +10,7 @@
 		"url": "https://github.com/wisetime-io/vscode-branch-in-window-title.git"
 	},
 	"engines": {
-		"vscode": "^1.42.0"
+		"vscode": "^1.56.0"
 	},
 	"categories": [
 		"Other"
