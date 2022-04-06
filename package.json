@@ -50,22 +50,22 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.2.2",
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.0",
 		"@types/node": "^12.11.7",
 		"@types/ramda": "^0.26.42",
-		"@types/text-encoding": "0.0.35",
-		"@types/vscode": "^1.56.0",
-		"@typescript-eslint/eslint-plugin": "^3.10.1",
-		"@typescript-eslint/parser": "^3.10.1",
-		"eslint": "^7.5.0",
-		"glob": "^7.1.7",
-		"mocha": "^8.4.0",
+		"@types/text-encoding": "0.0.36",
+		"@types/vscode": "^1.66.0",
+		"@typescript-eslint/eslint-plugin": "^5.18.0",
+		"@typescript-eslint/parser": "^5.18.0",
+		"eslint": "^8.12.0",
+		"glob": "^7.2.0",
+		"mocha": "^9.2.2",
 		"text-encoding": "^0.7.0",
-		"typescript": "^3.9.7",
-		"vscode-test": "^1.5.2"
+		"typescript": "^4.6.3",
+		"vscode-test": "^1.6.1"
 	},
 	"dependencies": {
-		"ramda": "^0.27.0"
+		"ramda": "^0.27.2"
 	}
 }
