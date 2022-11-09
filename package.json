@@ -36,6 +36,11 @@
 					],
 					"default": 3000,
 					"description": "Specifies the Git branch polling interval in milliseconds."
+				},
+				"branchInWindowTitle.branchTemplate": {
+					"type": "string",
+					"default": "${separator}[Branch: $branchName]",
+					"description": "Defines branch name appearance in window title. Use '$branchName' as placeholder."
 				}
 			}
 		}
