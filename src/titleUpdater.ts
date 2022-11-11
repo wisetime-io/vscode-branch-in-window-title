@@ -41,7 +41,7 @@ const makeTitle = (currentTitle: string, branchName: string | undefined): string
       return currentTitle;
     }
 
-    newTitle = newTitle + (branchName ? branchTemplate.replace('$branchName', branchName): '');
+    newTitle = newTitle + (branchName ? branchTemplate.replace('$branchName', branchName) : '');
   }
 
   if (branchName) {

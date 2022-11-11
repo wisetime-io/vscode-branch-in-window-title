@@ -23,7 +23,7 @@
 		"wisetime"
 	],
 	"activationEvents": [
-		"*"
+		"onStartupFinished"
 	],
 	"contributes": {
 		"configuration": {
