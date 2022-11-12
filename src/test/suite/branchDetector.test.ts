@@ -3,6 +3,7 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as path from 'path';
 import detectBranch from '../../branchDetector';
 import { TextEncoder } from 'text-encoding';
 
@@ -47,6 +48,10 @@ function deleteGitHeadFile(): void {
 };
 
 function writeGitHeadFile(content: string): void {
+  const dir = path.dirname(gitHeadFilePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
   const uri = vscode.Uri.file(gitHeadFilePath);
   const data = new TextEncoder().encode(content);
   fs.writeFileSync(gitHeadFilePath, data);
