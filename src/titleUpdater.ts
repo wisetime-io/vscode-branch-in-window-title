@@ -1,29 +1,32 @@
 // Copyright (c) 2020 WiseTime. All rights reserved.
 
-import * as vscode from 'vscode';
-
-let didChange = false;
-
 const updateTitle = (
-    getTitle: () => string,
-    setTitle: (t: string) => Thenable<void>,
+  getTitle: () => string,
+  setTitle: (t: string) => Thenable<void>,
+  branchTemplate: string,
+  branchNameIsPrefix: boolean,
 ) => (
-    branchName: string | undefined
+  branchName: string | undefined
 ): Thenable<void> => {
     const currentTitle = getTitle();
-    const newTitle = makeTitle(currentTitle, branchName);
+    const newTitle = makeTitle(currentTitle, branchName, branchTemplate, branchNameIsPrefix);
     if (newTitle !== currentTitle) {
       return setTitle(newTitle);
     }
     return Promise.resolve();
-};
+  };
 
 export default updateTitle;
 
-const makeTitle = (currentTitle: string, branchName: string | undefined): string => {
-  let branchTemplate = vscode.workspace
-    .getConfiguration('branchInWindowTitle')
-    .get('branchTemplate') as string;
+const makeTitle = (
+  currentTitle: string,
+  branchName: string | undefined,
+  branchTemplate: string,
+  branchNameIsPrefix: boolean,
+): string => {
+  if (!branchTemplate) {
+    return currentTitle;
+  }
 
   const branchTemplateRegEx = new RegExp(branchTemplate.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&").replace('\\$branchName', '([^\\]]*)'));
   if (!branchTemplateRegEx.test(branchTemplate)) {
@@ -36,18 +39,12 @@ const makeTitle = (currentTitle: string, branchName: string | undefined): string
   if (branch) {
     newTitle = newTitle.replace(branch[0], branchName ? branch[0].replace(branch[1], branchName) : '');
   } else {
-    if (didChange) {
-      // We changed the title but it no longer match the pattern
-      return currentTitle;
+    let branch = (branchName ? branchTemplate.replace('$branchName', branchName) : '');
+    if (branchNameIsPrefix) {
+      newTitle = branch + newTitle;
+    } else {
+      newTitle = newTitle + branch;
     }
-
-    newTitle = newTitle + (branchName ? branchTemplate.replace('$branchName', branchName) : '');
-  }
-
-  if (branchName) {
-    didChange = true;
-  } else {
-    didChange = false;
   }
 
   return newTitle;
