@@ -17,11 +17,24 @@ export function activate(context: vscode.ExtensionContext) {
   const pollingInterval = vscode.workspace
     .getConfiguration('branchInWindowTitle')
     .get('branchPollingInterval') as number;
+  const branchTemplate = vscode.workspace
+    .getConfiguration('branchInWindowTitle')
+    .get('branchTemplate') as string;
+  const branchNameIsPrefix = vscode.workspace
+    .getConfiguration('branchInWindowTitle')
+    .get('branchNameIsPrefix') as boolean;
 
-  const branchDetector = detectBranch(projectRoot, pollingInterval, updateTitle(getWindowTitle, setWindowTitle));
+  const branchDetector = detectBranch(projectRoot, pollingInterval, updateTitle(getWindowTitle, setWindowTitle, branchTemplate, branchNameIsPrefix));
   context.subscriptions.push(branchDetector);
 }
 
 export function deactivate() {
-  updateTitle(getWindowTitle, setWindowTitle)(undefined);
+  const branchTemplate = vscode.workspace
+    .getConfiguration('branchInWindowTitle')
+    .get('branchTemplate') as string;
+  const branchNameIsPrefix = vscode.workspace
+    .getConfiguration('branchInWindowTitle')
+    .get('branchNameIsPrefix') as boolean;
+
+  updateTitle(getWindowTitle, setWindowTitle, branchTemplate, branchNameIsPrefix)(undefined);
 }
