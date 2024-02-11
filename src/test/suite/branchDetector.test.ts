@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import detectBranch from '../../branchDetector';
 import { TextEncoder } from 'text-encoding';
+import { execFile } from 'child_process';
 
 suite('Branch Detector Integration Test Suite', () => {
 
@@ -36,13 +37,13 @@ suite('Branch Detector Integration Test Suite', () => {
   deleteGitHeadFile();
 });
 
-const resourcesPath = `${__dirname}/../../../src/test/resources`;
-const gitHeadFilePath = `${resourcesPath}/.git/HEAD`;
+const resourcesPath = vscode.Uri.file(path.normalize(`${__dirname}/../../../src/test/resources`));
+const gitHeadFilePath = `${resourcesPath.fsPath}/.git/HEAD`;
 
 function deleteGitHeadFile(): void {
   try {
     fs.unlinkSync(gitHeadFilePath);
-  } catch(_) {
+  } catch (_) {
     // Maybe the file doesn't exist.
   }
 };
@@ -56,3 +57,12 @@ function writeGitHeadFile(content: string): void {
   const data = new TextEncoder().encode(content);
   fs.writeFileSync(gitHeadFilePath, data);
 };
+
+async function initTestSuite(resourcesPath: vscode.Uri): Promise<void> {
+  if (resourcesPath.scheme !== 'file') return undefined;
+  return await new Promise((resolve, reject) => {
+    execFile("git", [], {
+      cwd: resourcesPath.fsPath,
+    });
+  });
+}
