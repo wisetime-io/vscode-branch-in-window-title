@@ -13,7 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
     // No open project, no Git repository.
     return;
   }
-  const projectRoot = vscode.workspace.workspaceFolders[0].uri.path;
   const pollingInterval = vscode.workspace
     .getConfiguration('branchInWindowTitle')
     .get('branchPollingInterval') as number;
@@ -24,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
     .getConfiguration('branchInWindowTitle')
     .get('branchNameIsPrefix') as boolean;
 
-  const branchDetector = detectBranch(projectRoot, pollingInterval, updateTitle(getWindowTitle, setWindowTitle, branchTemplate, branchNameIsPrefix));
+  const branchDetector = detectBranch(vscode.workspace.workspaceFolders[0].uri, pollingInterval, updateTitle(getWindowTitle, setWindowTitle, branchTemplate, branchNameIsPrefix));
   context.subscriptions.push(branchDetector);
 }
 
