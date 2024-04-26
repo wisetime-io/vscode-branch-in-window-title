@@ -38,16 +38,22 @@ class BranchDetector implements vscode.Disposable {
 
   private readFromExtension(rootPath: vscode.Uri): string | undefined {
     const extension = vscode.extensions.getExtension<git.GitExtension>("vscode.git");
-    if (!extension?.isActive) return undefined;
+    if (!extension?.isActive) {
+      return undefined;
+    }
 
     const repository = extension.exports.getAPI(1)?.getRepository(rootPath);
-    if (!repository) return undefined;
+    if (!repository) {
+      return undefined;
+    }
 
     return repository.state.HEAD?.name || undefined;
   }
 
   private async readFromGit(rootPath: vscode.Uri): Promise<string | undefined> {
-    if (rootPath.scheme != "file") return undefined;
+    if (rootPath.scheme !== "file") {
+      return undefined;
+    }
 
     return await new Promise((resolve, reject) => cp.execFile(
       "git", ["rev-parse", "--abbrev-ref", "HEAD"],
