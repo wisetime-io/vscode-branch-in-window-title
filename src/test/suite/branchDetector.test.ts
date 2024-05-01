@@ -17,8 +17,8 @@ suite('Branch Detector Integration Test Suite', function () {
   let branchNameFromGit: string | undefined;
 
   before(function (done) {
-    new Promise((resolve, reject) => {
-      cp.execFile(
+    (new Promise(
+      (resolve, reject) => cp.execFile(
         "git", ["rev-parse", "--abbrev-ref", "HEAD"],
         {
           cwd: projectRootPath.fsPath,
@@ -29,8 +29,8 @@ suite('Branch Detector Integration Test Suite', function () {
           }
           resolve(stdout.trim());
         },
-      );
-    }).then(branchName => {
+      )
+    )).then(branchName => {
       if (typeof branchName === "string") {
         branchNameFromGit = branchName;
       }
@@ -44,72 +44,80 @@ suite('Branch Detector Integration Test Suite', function () {
 
   suite('From project root path', function () {
     test('branchDidChange should be called with branchNameFromGit', function (done) {
-      detectBranch(projectRootPath, 100, branchName => {
+      const x = detectBranch(projectRootPath, 100, branchName => {
         assert.ok(branchName, 'Branch name is not empty');
         assert(branchName === branchNameFromGit, 'A branch is detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with mocked git branch name', function (done) {
       const mockedBranchName = "mocked-branch-name";
       stubExecFile().yields(null, mockedBranchName);
-      detectBranch(projectRootPath, 100, branchName => {
+      const x = detectBranch(projectRootPath, 100, branchName => {
         assert(branchName === mockedBranchName, 'A branch is detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with undefined when mocked git branch is undefined', function (done) {
       stubExecFile().yields(null, undefined);
-      detectBranch(projectRootPath, 100, branchName => {
+      const x = detectBranch(projectRootPath, 100, branchName => {
         assert(branchName === undefined, 'No branch detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with undefined when exception is thrown', function (done) {
       const error = new Error("fatal: not a git repository (or any of the parent directories): .git");
       stubExecFile().yields(error);
-      detectBranch(projectRootPath, 100, branchName => {
+      const x = detectBranch(projectRootPath, 100, branchName => {
         assert(branchName === undefined, 'No branch detected');
         done();
+        x.dispose();
       });
     });
   });
 
   suite('From project sub folder path', function () {
     test('branchDidChange should be called with branchNameFromGit', function (done) {
-      detectBranch(projectSubFolderPath, 100, branchName => {
+      const x = detectBranch(projectSubFolderPath, 100, branchName => {
         assert.ok(branchName, 'Branch name is not empty');
         assert(branchName === branchNameFromGit, 'A branch is detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with mocked git branch name', function (done) {
       const mockedBranchName = "mocked-branch-name";
       stubExecFile().yields(null, mockedBranchName);
-      detectBranch(projectSubFolderPath, 100, branchName => {
+      const x = detectBranch(projectSubFolderPath, 100, branchName => {
         assert(branchName === mockedBranchName, 'A branch is detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with undefined when mocked git branch is undefined', function (done) {
       stubExecFile().yields(null, undefined);
-      detectBranch(projectSubFolderPath, 100, branchName => {
+      const x = detectBranch(projectSubFolderPath, 100, branchName => {
         assert(branchName === undefined, 'No branch detected');
         done();
+        x.dispose();
       });
     });
 
     test('branchDidChange should be called with undefined when error is thrown', function (done) {
       const error = new Error("fatal: not a git repository (or any of the parent directories): .git");
       stubExecFile().yields(error);
-      detectBranch(projectSubFolderPath, 100, branchName => {
+      const x = detectBranch(projectSubFolderPath, 100, branchName => {
         assert(branchName === undefined, 'No branch detected');
         done();
+        x.dispose();
       });
     });
   });
