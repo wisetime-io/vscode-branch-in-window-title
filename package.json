@@ -1,79 +1,79 @@
 {
-    "name": "branch-in-window-title",
-    "displayName": "Branch in Window Title",
-    "description": "Visual Studio Code extension that shows the current Git branch in the window title. This can be used to automate time allocation to issue tracking systems via WiseTime.",
-    "publisher": "wisetime",
-    "version": "0.1.5",
-    "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/wisetime-io/vscode-branch-in-window-title.git"
-    },
-    "engines": {
-        "vscode": "^1.70.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "keywords": [
-        "git",
-        "branch",
-        "window",
-        "title",
-        "wisetime"
-    ],
-    "activationEvents": [
-        "onStartupFinished"
-    ],
-    "contributes": {
-        "configuration": {
-            "title": "Branch in Window Title",
-            "properties": {
-                "branchInWindowTitle.branchPollingInterval": {
-                    "type": [
-                        "number",
-                        "null"
-                    ],
-                    "default": 3000,
-                    "description": "Specifies the Git branch polling interval in milliseconds."
-                },
-                "branchInWindowTitle.branchTemplate": {
-                    "type": "string",
-                    "default": "${separator}[Branch: $branchName]",
-                    "description": "Defines branch name appearance in window title. Use '$branchName' as placeholder."
-                },
-                "branchInWindowTitle.branchNameIsPrefix": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Prevent conflicts with time tracking software that thinks the application name always in window title after the last dash."
-                }
-            }
-        }
-    },
-    "main": "./out/extension.js",
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "lint": "eslint src --ext ts",
-        "watch": "tsc -watch -p ./",
-        "pretest": "npm run compile && npm run lint",
-        "test": "node ./out/test/runTest.js"
-    },
-    "devDependencies": {
-        "@types/glob": "^7.2.0",
-        "@types/mocha": "^9.1.0",
-        "@types/node": "^12.11.7",
-        "@types/sinon": "^17.0.3",
-        "@types/text-encoding": "0.0.36",
-        "@types/vscode": "^1.66.0",
-        "@typescript-eslint/eslint-plugin": "^5.18.0",
-        "@typescript-eslint/parser": "^5.18.0",
-        "@vscode/test-electron": "^2.3.9",
-        "eslint": "^8.12.0",
-        "glob": "^7.2.0",
-        "mocha": "^9.2.2",
-        "sinon": "^17.0.1",
-        "text-encoding": "^0.7.0",
-        "typescript": "^4.6.3"
-    }
+	"name": "branch-in-window-title",
+	"displayName": "Branch in Window Title",
+	"description": "Visual Studio Code extension that shows the current Git branch in the window title. This can be used to automate time allocation to issue tracking systems via WiseTime.",
+	"publisher": "wisetime",
+	"version": "0.1.5",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wisetime-io/vscode-branch-in-window-title.git"
+	},
+	"engines": {
+		"vscode": "^1.70.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"git",
+		"branch",
+		"window",
+		"title",
+		"wisetime"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"contributes": {
+		"configuration": {
+			"title": "Branch in Window Title",
+			"properties": {
+				"branchInWindowTitle.branchPollingInterval": {
+					"type": [
+						"number",
+						"null"
+					],
+					"default": 3000,
+					"description": "Specifies the Git branch polling interval in milliseconds."
+				},
+				"branchInWindowTitle.branchTemplate": {
+					"type": "string",
+					"default": "${separator}[Branch: $branchName]",
+					"description": "Defines branch name appearance in window title. Use '$branchName' as placeholder."
+				},
+				"branchInWindowTitle.branchNameIsPrefix": {
+					"type": "boolean",
+					"default": false,
+					"description": "Prevent conflicts with time tracking software that thinks the application name always in window title after the last dash."
+				}
+			}
+		}
+	},
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.0",
+		"@types/node": "^12.11.7",
+		"@types/sinon": "^17.0.3",
+		"@types/text-encoding": "0.0.36",
+		"@types/vscode": "^1.66.0",
+		"@typescript-eslint/eslint-plugin": "^5.18.0",
+		"@typescript-eslint/parser": "^5.18.0",
+		"@vscode/test-electron": "^2.3.9",
+		"eslint": "^8.12.0",
+		"glob": "^7.2.0",
+		"mocha": "^9.2.2",
+		"sinon": "^17.0.1",
+		"text-encoding": "^0.7.0",
+		"typescript": "^4.6.3"
+	}
 }
