@@ -1,17 +1,18 @@
 // Copyright (c) 2020 WiseTime. All rights reserved.
 
 import * as vscode from 'vscode';
+import * as cp from "child_process";
+import * as git from "contrib/microsoft/vscode/extensions/git/api/git";
 
 class BranchDetector implements vscode.Disposable {
 
   private intervalId: NodeJS.Timeout;
   private branchName: string | undefined;
 
-  constructor(projectRootPath: string, pollingInterval: number, branchDidChange: (branchName: string | undefined) => void) {
-    const headFile = projectRootPath + '/.git/HEAD';
-    this.readBranchName(headFile).then(branchDidChange);
+  constructor(projectRootPath: vscode.Uri, pollingInterval: number, branchDidChange: (branchName: string | undefined) => void) {
+    this.readBranchName(projectRootPath).then(branchDidChange);
     this.intervalId = setInterval(
-      () => this.readBranchName(headFile).then(b => this.callIfChanged(b, branchDidChange)),
+      () => this.readBranchName(projectRootPath).then((b) => this.callIfChanged(b, branchDidChange)),
       pollingInterval
     );
   }
@@ -20,17 +21,12 @@ class BranchDetector implements vscode.Disposable {
     clearInterval(this.intervalId);
   }
 
-  private async readBranchName(headFilePath: string): Promise<string | undefined> {
+  private async readBranchName(headFilePath: vscode.Uri): Promise<string | undefined> {
     try {
-      const data = await vscode.workspace.fs.readFile(vscode.Uri.file(headFilePath));
-      const content = Buffer.from(data).toString('utf8');
-      if (content.startsWith('ref: refs/heads/')) {
-        return content.replace(/^(ref: refs\/heads\/\.*)/, '').trim();
-      }
+      return this.readFromExtension(headFilePath) || await this.readFromGit(headFilePath);
     } catch (_) {
       // Unable to read file. Perhaps it does not exist.
     }
-    return undefined;
   }
 
   private callIfChanged(branchName: string | undefined, branchDidChange: (b: string | undefined) => void): void {
@@ -39,6 +35,34 @@ class BranchDetector implements vscode.Disposable {
       branchDidChange(branchName);
     }
   };
+
+  private readFromExtension(rootPath: vscode.Uri): string | undefined {
+    const extension = vscode.extensions.getExtension<git.GitExtension>("vscode.git");
+    if (!extension?.isActive) {
+      return undefined;
+    }
+
+    const repository = extension.exports.getAPI(1)?.getRepository(rootPath);
+    if (!repository) {
+      return undefined;
+    }
+
+    return repository.state.HEAD?.name || undefined;
+  }
+
+  private async readFromGit(rootPath: vscode.Uri): Promise<string | undefined> {
+    if (rootPath.scheme !== "file") {
+      return undefined;
+    }
+
+    return await new Promise((resolve, reject) => cp.execFile(
+      "git", ["rev-parse", "--abbrev-ref", "HEAD"],
+      {
+        cwd: rootPath.fsPath,
+      },
+      (e, stdout, stderr) => resolve(stdout.trim() || undefined)
+    ));
+  }
 }
 
 /**
@@ -50,7 +74,7 @@ class BranchDetector implements vscode.Disposable {
  * @return A disposable that stops branch detection when disposed.
  */
 export default function detectBranch(
-  projectRootPath: string,
+  projectRootPath: vscode.Uri,
   pollingInterval: number = 3000,
   branchDidChange: (branchName: string | undefined) => void
 ): vscode.Disposable {
