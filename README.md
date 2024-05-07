@@ -8,10 +8,10 @@
 
 You can install the extension from the [Branch in Window Title page](https://marketplace.visualstudio.com/items?itemName=wisetime.branch-in-window-title) on the Visual Studio marketplace.
 
-Alternatively, you can [download the latest release](https://github.com/wisetime-io/vscode-branch-in-window-title/releases/download/v0.1.0/branch-in-window-title-0.1.0.vsix) of Branch in Window Title, then install the extension via the command line:
+Alternatively, you can [download the latest release](https://github.com/wisetime-io/vscode-branch-in-window-title/releases/download/v0.2.0/branch-in-window-title-0.2.0.vsix) of Branch in Window Title, then install the extension via the command line:
 
 ```text
-code --install-extension branch-in-window-title-0.1.0.vsix
+code --install-extension branch-in-window-title-0.2.0.vsix
 ```
 
 You can also install the extension by using the `Install from VSIX` command in the Extensions view command drop-down, or the `Extensions: Install from VSIX` command in the Command Palette.
