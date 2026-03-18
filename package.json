@@ -10,7 +10,7 @@
 		"url": "https://github.com/wisetime-io/vscode-branch-in-window-title.git"
 	},
 	"engines": {
-		"vscode": "^1.70.0"
+		"vscode": "^1.82.0"
 	},
 	"categories": [
 		"Other"
@@ -54,26 +54,28 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
+		"lint": "eslint src",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
 		"test": "node ./out/test/runTest.js"
 	},
+	"overrides": {
+		"mocha": {
+			"diff": "^8.0.3",
+			"serialize-javascript": "^7.0.3"
+		}
+	},
 	"devDependencies": {
-		"@types/glob": "^7.2.0",
-		"@types/mocha": "^9.1.0",
-		"@types/node": "^12.11.7",
+		"@types/mocha": "^10.0.0",
+		"@types/node": "^18.0.0",
 		"@types/sinon": "^17.0.3",
-		"@types/text-encoding": "0.0.36",
-		"@types/vscode": "^1.66.0",
-		"@typescript-eslint/eslint-plugin": "^5.18.0",
-		"@typescript-eslint/parser": "^5.18.0",
-		"@vscode/test-electron": "^2.3.9",
-		"eslint": "^8.12.0",
-		"glob": "^7.2.0",
-		"mocha": "^9.2.2",
+		"@types/vscode": "^1.82.0",
+		"@typescript-eslint/eslint-plugin": "^8.0.0",
+		"@typescript-eslint/parser": "^8.0.0",
+		"@vscode/test-electron": "^2.5.2",
+		"eslint": "^9.0.0",
+		"mocha": "^11.0.0",
 		"sinon": "^17.0.1",
-		"text-encoding": "^0.7.0",
-		"typescript": "^4.6.3"
+		"typescript": "^5.0.0"
 	}
 }
