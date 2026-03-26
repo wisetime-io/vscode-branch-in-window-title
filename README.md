@@ -1,6 +1,6 @@
 # Branch in Window Title VS Code Extension
 
-**Branch in Window Title** is a simple [Visual Studio Code](https://code.visualstudio.com) extension that looks for a Git repository in the currently open workspace. If a Git repository is detected, the current branch name is appended to the VS Code window title.
+**Branch in Window Title** is a simple [Visual Studio Code](https://code.visualstudio.com) and [Cursor](https://cursor.com) extension that looks for a Git repository in the currently open workspace. If a Git repository is detected, the current branch name is appended to the window title.
 
 ![VS Code Window Title](doc/resources/window-title.png)
 
@@ -55,6 +55,16 @@ The Jira Connector also watches Jira for new issues and automatically syncs them
 ### Many Connection Options
 
 Not using Jira? We offer many other types of [Connectors](https://wisetime.com/connectors/), including [Zapier](https://wisetime.com/zapier/). We also provide the [WiseTime Connect API](https://wisetime.com/docs/connect/), as well as a [WiseTime Connector Java Library](https://github.com/wisetime-io/wisetime-connector-java) that wraps the API. With these, you can easily implement your own custom connector.
+
+## Cursor IDE Compatibility
+
+This extension works in [Cursor](https://cursor.com), but Cursor's default custom title bar does not display the `window.title` setting. To use this extension with Cursor, switch to the native title bar by adding the following to your settings:
+
+```json
+"window.titleBarStyle": "native"
+```
+
+The extension will detect Cursor and offer to make this change automatically on first activation. After changing the title bar style, restart Cursor for the change to take effect.
 
 ## Extension Settings
 
