@@ -13,6 +13,7 @@ const CURSOR_COMPAT_DISMISSED_KEY = 'cursorTitleBarNotificationDismissed';
 
 export function activate(context: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders) {
+    // No open project, no Git repository.
     return;
   }
   const pollingInterval = vscode.workspace
