@@ -1,4 +1,4 @@
-// Copyright (c) 2020 WiseTime. All rights reserved.
+// Copyright (c) 2026 WiseTime. All rights reserved.
 
 export interface NotificationDeps {
   appName: string;
