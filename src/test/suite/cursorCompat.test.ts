@@ -1,4 +1,4 @@
-// Copyright (c) 2020 WiseTime. All rights reserved.
+// Copyright (c) 2026 WiseTime. All rights reserved.
 
 import * as assert from 'assert';
 import showCursorTitleBarNotification, { shouldShowNotification, NotificationDeps } from '../../cursorCompat';
